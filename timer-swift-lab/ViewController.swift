@@ -8,13 +8,25 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController
+{
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-
+    
+    // MARK: - Actions
+    @IBAction func onFiveSeconds(_ sender: Any)
+    {
+        
+    }
+    
+    @IBAction func onTweentySeconds(_ sender: Any)
+    {
+        
+    }
+    
+    // MARK: - Time
+    @IBOutlet weak var timeLabel: UILabel!
 }
-
