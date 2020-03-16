@@ -15,14 +15,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlX-SZ-IcQ">
-                                <rect key="frame" x="187" y="244" width="41" height="39"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlX-SZ-IcQ">
+                                <rect key="frame" x="187" y="244" width="41" height="38"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="hWx-q5-fWW">
-                                <rect key="frame" x="127" y="484" width="160" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="hWx-q5-fWW">
+                                <rect key="frame" x="127" y="482.5" width="160" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hPo-Re-WOa">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
@@ -49,8 +49,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="hWx-q5-fWW" firstAttribute="top" secondItem="zlX-SZ-IcQ" secondAttribute="bottom" constant="200" id="LYu-zn-1na"/>
                             <constraint firstItem="zlX-SZ-IcQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rdu-Rp-M7L"/>
                             <constraint firstItem="hWx-q5-fWW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="URh-1p-fBN"/>
+                            <constraint firstItem="zlX-SZ-IcQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="VyL-9K-eCv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
