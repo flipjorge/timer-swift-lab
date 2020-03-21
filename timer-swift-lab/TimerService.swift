@@ -33,29 +33,60 @@ class TimerService
     func startTimer(_ seconds:Int)
     {
         timer?.invalidate()
-        startTime = seconds
+
         currentTime = seconds
         //
         timer = Timer.init(timeInterval: 1, repeats: true) { [weak self] timer in
             guard let self = self else { return }
             //
             self.currentTime -= 1
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notification.interval.rawValue), object: self, userInfo: ["remainingSeconds" : self.currentTime])
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notification.interval.rawValue), object: self, userInfo: [Keys.remainingSeconds.rawValue : self.currentTime])
             //
             if self.currentTime <= 0
             {
                 self.stopTimer()
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notification.completed.rawValue), object: self, userInfo: ["remainingSeconds" : self.currentTime])
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notification.completed.rawValue), object: self, userInfo: [Keys.remainingSeconds.rawValue : self.currentTime])
             }
         }
-        timer?.tolerance = 0.1
         guard let timer = timer else { return }
+        timer.tolerance = 0.1
         RunLoop.current.add(timer, forMode: .common)
+        
+        //saving the end time
+        let endTime = Date(timeIntervalSinceNow: TimeInterval(currentTime))
+        saveEndTime(endTime.timeIntervalSince1970)
+    }
+    
+    func resumeTimer()
+    {
+        let endTimeValue =  UserDefaults.standard.double(forKey: Keys.endTime.rawValue)
+        guard endTimeValue > 0 else { return }
+        
+        let endTimeDate = Date(timeIntervalSince1970: endTimeValue)
+        let now = Date()
+        
+        let remainingSeconds = endTimeDate.timeIntervalSince(now)
+        guard remainingSeconds > 0 else { return }
+        
+        startTimer(Int(remainingSeconds))
     }
     
     func stopTimer()
     {
         timer?.invalidate()
         timer = nil
+        UserDefaults.standard.removeObject(forKey: Keys.endTime.rawValue)
+    }
+    
+    // MARK: - User Defaults
+    private enum Keys: String
+    {
+        case remainingSeconds = "remainingSeconds"
+        case endTime = "endTime"
+    }
+    
+    private func saveEndTime(_ endTime: TimeInterval)
+    {
+        UserDefaults.standard.set(endTime, forKey: Keys.endTime.rawValue)
     }
 }
