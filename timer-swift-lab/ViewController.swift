@@ -15,6 +15,8 @@ class ViewController: UIViewController
     {
         super.viewDidLoad()
         //
+        UNUserNotificationCenter.current().delegate = self
+        //
         NotificationCenter.default.addObserver(self, selector: #selector(onTimerInterval), name: NSNotification.Name(TimerService.Notification.interval.rawValue), object: nil)
     }
     
@@ -51,6 +53,17 @@ class ViewController: UIViewController
     @objc func onTimerInterval(notification:Notification)
     {
         guard let userInfo = notification.userInfo else { return }
-        timeLabel.text = "\(userInfo["remainingSeconds"] ?? 0)s"
+        timeLabel.text = "\(userInfo[TimerService.ValueKeys.remainingSeconds.rawValue] ?? 0)s"
+    }
+}
+
+extension ViewController: UNUserNotificationCenterDelegate
+{
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert])
     }
 }
