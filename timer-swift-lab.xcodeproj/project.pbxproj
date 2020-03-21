@@ -15,6 +15,7 @@
 		2776848A241EE8D400534F27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27768488241EE8D400534F27 /* LaunchScreen.storyboard */; };
 		27768492241F007100534F27 /* TimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27768491241F007100534F27 /* TimerService.swift */; };
 		27A0A93E2426CAB30070A2AC /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A0A93D2426CAB30070A2AC /* NotificationsService.swift */; };
+		27A0A9402426DFDE0070A2AC /* time.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 27A0A93F2426DFDE0070A2AC /* time.aiff */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		2776848B241EE8D400534F27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27768491241F007100534F27 /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
 		27A0A93D2426CAB30070A2AC /* NotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsService.swift; sourceTree = "<group>"; };
+		27A0A93F2426DFDE0070A2AC /* time.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = time.aiff; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		2776847C241EE8D100534F27 /* timer-swift-lab */ = {
 			isa = PBXGroup;
 			children = (
+				27A0A9412426E0020070A2AC /* sounds */,
 				2776847D241EE8D100534F27 /* AppDelegate.swift */,
 				2776847F241EE8D100534F27 /* SceneDelegate.swift */,
 				27768481241EE8D100534F27 /* ViewController.swift */,
@@ -71,6 +74,14 @@
 				27A0A93D2426CAB30070A2AC /* NotificationsService.swift */,
 			);
 			path = "timer-swift-lab";
+			sourceTree = "<group>";
+		};
+		27A0A9412426E0020070A2AC /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				27A0A93F2426DFDE0070A2AC /* time.aiff */,
+			);
+			path = sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,6 +142,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27A0A9402426DFDE0070A2AC /* time.aiff in Resources */,
 				2776848A241EE8D400534F27 /* LaunchScreen.storyboard in Resources */,
 				27768487241EE8D400534F27 /* Assets.xcassets in Resources */,
 				27768485241EE8D100534F27 /* Main.storyboard in Resources */,

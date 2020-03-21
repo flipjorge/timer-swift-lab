@@ -16,18 +16,11 @@ class TimerService
     // MARK: - Timer
     private var timer:Timer?
     
-    private var startTime:Int = 20
     var currentTime:Int = 0
     
     var isActive: Bool
     {
         timer != nil
-    }
-    
-    enum Notification: String
-    {
-        case interval = "TimerInterval"
-        case completed = "TimerCompleted"
     }
     
     func startTimer(_ seconds:Int)
@@ -40,12 +33,12 @@ class TimerService
             guard let self = self else { return }
             //
             self.currentTime -= 1
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notification.interval.rawValue), object: self, userInfo: [Keys.remainingSeconds.rawValue : self.currentTime])
+            self.postInterval(seconds: self.currentTime)
             //
             if self.currentTime <= 0
             {
                 self.stopTimer()
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notification.completed.rawValue), object: self, userInfo: [Keys.remainingSeconds.rawValue : self.currentTime])
+                self.postCompleted()
             }
         }
         guard let timer = timer else { return }
@@ -53,20 +46,28 @@ class TimerService
         RunLoop.current.add(timer, forMode: .common)
         
         //saving the end time
-        let endTime = Date(timeIntervalSinceNow: TimeInterval(currentTime))
+        let endTime = Date(timeIntervalSinceNow: TimeInterval(seconds))
         saveEndTime(endTime.timeIntervalSince1970)
+        
+        //
+        NotificationsService.shared.sendNotification(identifier: "timerEnded", title: "Timer Ended", body: "Well done!", sound: "time.aiff", in: TimeInterval(seconds))
     }
     
     func resumeTimer()
     {
-        let endTimeValue =  UserDefaults.standard.double(forKey: Keys.endTime.rawValue)
+        let endTimeValue =  UserDefaults.standard.double(forKey: ValueKeys.endTime.rawValue)
         guard endTimeValue > 0 else { return }
         
         let endTimeDate = Date(timeIntervalSince1970: endTimeValue)
         let now = Date()
         
         let remainingSeconds = endTimeDate.timeIntervalSince(now)
-        guard remainingSeconds > 0 else { return }
+        if remainingSeconds <= 0 {
+            postInterval(seconds: 0)
+            postCompleted()
+            stopTimer()
+            return
+        }
         
         startTimer(Int(remainingSeconds))
     }
@@ -75,11 +76,11 @@ class TimerService
     {
         timer?.invalidate()
         timer = nil
-        UserDefaults.standard.removeObject(forKey: Keys.endTime.rawValue)
+        UserDefaults.standard.removeObject(forKey: ValueKeys.endTime.rawValue)
     }
     
     // MARK: - User Defaults
-    private enum Keys: String
+    enum ValueKeys: String
     {
         case remainingSeconds = "remainingSeconds"
         case endTime = "endTime"
@@ -87,6 +88,23 @@ class TimerService
     
     private func saveEndTime(_ endTime: TimeInterval)
     {
-        UserDefaults.standard.set(endTime, forKey: Keys.endTime.rawValue)
+        UserDefaults.standard.set(endTime, forKey: ValueKeys.endTime.rawValue)
+    }
+    
+    // MARK: - Notification
+    enum Notification: String
+    {
+        case interval = "TimerInterval"
+        case completed = "TimerCompleted"
+    }
+    
+    private func postInterval(seconds: Int)
+    {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notification.interval.rawValue), object: self, userInfo: [ValueKeys.remainingSeconds.rawValue : seconds])
+    }
+    
+    private func postCompleted()
+    {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notification.completed.rawValue), object: self, userInfo: [ValueKeys.remainingSeconds.rawValue : 0])
     }
 }
