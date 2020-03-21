@@ -11,10 +11,16 @@ import UIKit
 class ViewController: UIViewController
 {
     // MARK: - Lifecycle
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         //
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(onTimerInterval), name: NSNotification.Name(TimerService.Notification.interval.rawValue), object: nil)
+    }
+    
+    deinit
+    {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Actions
@@ -34,15 +40,17 @@ class ViewController: UIViewController
     func startTimer(seconds: Int)
     {
         timeLabel.text = "\(seconds)s"
-        TimerService.shared.startTimer(seconds: seconds, interval: { [weak self] remaining in
-            self?.timeLabel.text = "\(remaining)s"
-        }) {
-            print("complete!")
-        }
+        TimerService.shared.startTimer(seconds)
     }
     
     func stopTimer()
     {
         TimerService.shared.stopTimer()
+    }
+    
+    @objc func onTimerInterval(notification:Notification)
+    {
+        guard let userInfo = notification.userInfo else { return }
+        timeLabel.text = "\(userInfo["remainingSeconds"] ?? 0)s"
     }
 }

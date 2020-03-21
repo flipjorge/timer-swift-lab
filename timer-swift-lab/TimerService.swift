@@ -17,9 +17,20 @@ class TimerService
     private var timer:Timer?
     
     private var startTime:Int = 20
-    private var currentTime:Int = 0
+    var currentTime:Int = 0
     
-    func startTimer(seconds:Int, interval:@escaping(Int) -> Void, completion:@escaping() -> Void)
+    var isActive: Bool
+    {
+        timer != nil
+    }
+    
+    enum Notification: String
+    {
+        case interval = "TimerInterval"
+        case completed = "TimerCompleted"
+    }
+    
+    func startTimer(_ seconds:Int)
     {
         timer?.invalidate()
         startTime = seconds
@@ -29,12 +40,12 @@ class TimerService
             guard let self = self else { return }
             //
             self.currentTime -= 1
-            interval(self.currentTime)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notification.interval.rawValue), object: self, userInfo: ["remainingSeconds" : self.currentTime])
             //
             if self.currentTime <= 0
             {
                 self.stopTimer()
-                completion()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notification.completed.rawValue), object: self, userInfo: ["remainingSeconds" : self.currentTime])
             }
         }
         timer?.tolerance = 0.1
