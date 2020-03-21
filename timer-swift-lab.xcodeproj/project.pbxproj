@@ -14,6 +14,7 @@
 		27768487241EE8D400534F27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27768486241EE8D400534F27 /* Assets.xcassets */; };
 		2776848A241EE8D400534F27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27768488241EE8D400534F27 /* LaunchScreen.storyboard */; };
 		27768492241F007100534F27 /* TimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27768491241F007100534F27 /* TimerService.swift */; };
+		27A0A93E2426CAB30070A2AC /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A0A93D2426CAB30070A2AC /* NotificationsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		27768489241EE8D400534F27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2776848B241EE8D400534F27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27768491241F007100534F27 /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
+		27A0A93D2426CAB30070A2AC /* NotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				27768488241EE8D400534F27 /* LaunchScreen.storyboard */,
 				2776848B241EE8D400534F27 /* Info.plist */,
 				27768491241F007100534F27 /* TimerService.swift */,
+				27A0A93D2426CAB30070A2AC /* NotificationsService.swift */,
 			);
 			path = "timer-swift-lab";
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 			files = (
 				27768482241EE8D100534F27 /* ViewController.swift in Sources */,
 				2776847E241EE8D100534F27 /* AppDelegate.swift in Sources */,
+				27A0A93E2426CAB30070A2AC /* NotificationsService.swift in Sources */,
 				27768480241EE8D100534F27 /* SceneDelegate.swift in Sources */,
 				27768492241F007100534F27 /* TimerService.swift in Sources */,
 			);
