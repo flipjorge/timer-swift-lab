@@ -28,6 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
+        NotificationsService.shared.requestAuthorization()
         TimerService.shared.resumeTimer()
     }
 
